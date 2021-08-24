@@ -15,10 +15,10 @@ let imageName: String
 struct ContentView: View {
 
     let data: [DataModel] = [
-        .init(id: "0", name: "Chat", imageName: "Cat"),
-        .init(id: "1", name: "Chien", imageName: "Dog"),
-        .init(id: "2", name: "Oiseau", imageName: "Bird"),
-        .init(id: "3", name: "Cheval", imageName: "Horse"),
+        .init(id: "0", name: "Movie 1", imageName: "Cat"),
+        .init(id: "1", name: "Movie 2", imageName: "Dog"),
+        .init(id: "2", name: "Movie 3", imageName: "Bird"),
+        .init(id: "3", name: "Movie 4", imageName: "Horse"),
     ]
     
     var body: some View {
@@ -29,27 +29,41 @@ struct ContentView: View {
                         CollectionView(data: items)
                     }
                 }
-            }.navigationBarTitle("Movie in theatres", displayMode: .inline)
+            }.navigationBarTitle("Actuellement à l'affiche", displayMode: .inline)
         }
     }
 }
 
 struct CollectionView: View {
     let data: DataModel
+    @State private var showingAlert = false
+    @State private var MovieChoosed = 0
+
     var body: some View {
         VStack {
                     Spacer()
+                    NavigationLink(destination: Text("Film choisi")){
                     Image(self.data.imageName)
                     .resizable()
                     .frame(width: 150, height: 150)
                     .foregroundColor(.yellow)
-                    .clipShape(Circle())
+                    .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
                     .shadow(radius: 10)
+            }
                     Spacer()
                 .padding(.bottom, 16)
                 Text(self.data.name)
                 .frame(maxWidth: .infinity, alignment: .center)
         }
+        
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("Movie choosed !"), message: Text("Movie description here"), dismissButton: .default(Text("Continue")) {
+            })
+        }
+    }
+
+    func MovieChoosed(_ MovieChoosed: Int) {
+        showingAlert = true
     }
 }
 struct ContentView_Previews: PreviewProvider {
