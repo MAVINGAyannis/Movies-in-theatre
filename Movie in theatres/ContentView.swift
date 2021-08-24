@@ -36,34 +36,46 @@ struct ContentView: View {
 
 struct CollectionView: View {
     let data: DataModel
-    @State private var showingAlert = false
-    @State private var MovieChoosed = 0
 
     var body: some View {
         VStack {
-                    Spacer()
-                    NavigationLink(destination: Text("Film choisi")){
+            Spacer()
+            NavigationLink(destination: Choosed_movie(data: data)){
+                VStack {
                     Image(self.data.imageName)
                     .resizable()
                     .frame(width: 150, height: 150)
                     .foregroundColor(.yellow)
                     .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
                     .shadow(radius: 10)
-            }
                     Spacer()
-                .padding(.bottom, 16)
-                Text(self.data.name)
-                .frame(maxWidth: .infinity, alignment: .center)
-        }
-        
-        .alert(isPresented: $showingAlert) {
-            Alert(title: Text("Movie choosed !"), message: Text("Movie description here"), dismissButton: .default(Text("Continue")) {
-            })
+                    .padding(.bottom, 16)
+                    Text(self.data.name)
+                    Text("Date de sortie")
+                    Text("Synopsis")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                }
+            }
         }
     }
 
-    func MovieChoosed(_ MovieChoosed: Int) {
-        showingAlert = true
+    struct Choosed_movie: View {
+        let data: DataModel
+
+        var body: some View {
+            VStack {
+                Image(self.data.imageName)
+                .resizable()
+                .frame(width: 150, height: 150)
+                .foregroundColor(.yellow)
+                .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
+                .shadow(radius: 10)
+                Text(self.data.name)
+                Text("Date de sortie")
+                Text("Synopsis")
+                .frame(maxWidth: .infinity, alignment: .center)
+            }
+        }
     }
 }
 struct ContentView_Previews: PreviewProvider {
