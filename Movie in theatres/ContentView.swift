@@ -12,8 +12,22 @@ let name: String
 let imageName: String
 }
 
-struct ContentView: View {
+struct NavigationConfigurator: UIViewControllerRepresentable {
+    var configure: (UINavigationController) -> Void = { _ in }
 
+    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
+        UIViewController()
+    }
+    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
+        if let nc = uiViewController.navigationController {
+            self.configure(nc)
+        }
+    }
+
+}
+
+struct ContentView: View {
+    
     let data: [DataModel] = [
         .init(id: "0", name: "Movie 1", imageName: "Cat"),
         .init(id: "1", name: "Movie 2", imageName: "Dog"),
@@ -21,15 +35,23 @@ struct ContentView: View {
         .init(id: "3", name: "Movie 4", imageName: "Horse"),
     ]
     
+    init() {
+        //Use this if NavigationBarTitle is with displayMode = .inline
+        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Thonburi", size: 20)!]
+    }
+    
     var body: some View {
         NavigationView {
             List {
                 ForEach(data) { items in
-                    ForEach(0..<1) { item in
-                        CollectionView(data: items)
-                    }
+                    CollectionView(data: items)
                 }
-            }.navigationBarTitle("Actuellement à l'affiche", displayMode: .inline)
+            }.navigationBarTitle (Text("Actuellement à l'affiche"), displayMode: .inline)
+            .background(NavigationConfigurator { nc in
+                            nc.navigationBar.barTintColor = .blue
+                            nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+            })
+            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }
@@ -40,6 +62,7 @@ struct CollectionView: View {
     var body: some View {
         VStack {
             Spacer()
+                .padding(.bottom, 16)
             NavigationLink(destination: Choosed_movie(data: data)){
                 VStack {
                     Image(self.data.imageName)
