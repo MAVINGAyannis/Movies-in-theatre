@@ -13,11 +13,12 @@ let imageName: String
 }
 
 struct ContentView: View {
+
     let data: [DataModel] = [
-    .init(id: "0", name: "Chat", imageName: "Cat"),
-    .init(id: "1", name: "Chien", imageName: "Dog"),
-    .init(id: "2", name: "Oiseau", imageName: "Bird"),
-    .init(id: "3", name: "Cheval", imageName: "Horse")
+        .init(id: "0", name: "Chat", imageName: "Cat"),
+        .init(id: "1", name: "Chien", imageName: "Dog"),
+        .init(id: "2", name: "Oiseau", imageName: "Bird"),
+        .init(id: "3", name: "Cheval", imageName: "Horse"),
     ]
     
     var body: some View {
@@ -37,7 +38,6 @@ struct CollectionView: View {
     let data: DataModel
     var body: some View {
         VStack {
-            HStack {
                     Spacer()
                     Image(self.data.imageName)
                     .resizable()
@@ -47,12 +47,8 @@ struct CollectionView: View {
                     .shadow(radius: 10)
                     Spacer()
                 .padding(.bottom, 16)
-            }
-            HStack {
-                Spacer()
                 Text(self.data.name)
-                Spacer()
-            }
+                .frame(maxWidth: .infinity, alignment: .center)
         }
     }
 }
