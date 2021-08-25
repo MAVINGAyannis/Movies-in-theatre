@@ -36,8 +36,7 @@ struct ContentView: View {
     ]
     
     init() {
-        //Use this if NavigationBarTitle is with displayMode = .inline
-        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Thonburi", size: 20)!]
+        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "NotoSansKannada-Bold", size: 20)!]
     }
     
     var body: some View {
@@ -64,7 +63,7 @@ struct CollectionView: View {
             Spacer()
                 .padding(.bottom, 16)
             NavigationLink(destination: Choosed_movie(data: data)){
-                VStack {
+                HStack {
                     Image(self.data.imageName)
                     .resizable()
                     .frame(width: 150, height: 150)
@@ -73,10 +72,16 @@ struct CollectionView: View {
                     .shadow(radius: 10)
                     Spacer()
                     .padding(.bottom, 16)
-                    Text(self.data.name)
-                    Text("Date de sortie")
-                    Text("Synopsis")
-                    .frame(maxWidth: .infinity, alignment: .center)
+                    VStack {
+                        Text(self.data.name)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        Text("Sortie : ")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        Spacer()
+                        .padding(.bottom, 10)
+                        Text("Film action interdit au moins de 18 ans")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    }
                 }
             }
         }
