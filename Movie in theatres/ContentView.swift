@@ -63,24 +63,26 @@ struct CollectionView: View {
             Spacer()
                 .padding(.bottom, 16)
             NavigationLink(destination: Choosed_movie(data: data)){
-                HStack {
-                    Image(self.data.imageName)
-                    .resizable()
-                    .frame(width: 150, height: 150)
-                    .foregroundColor(.yellow)
-                    .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
-                    .shadow(radius: 10)
-                    Spacer()
-                    .padding(.bottom, 16)
-                    VStack {
-                        Text(self.data.name)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                        Text("Sortie : ")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                        Spacer()
-                        .padding(.bottom, 10)
+                VStack(spacing: 30) {
+                    HStack(spacing: 20) {
+                        Image(self.data.imageName)
+                        .resizable()
+                        .frame(width: 150, height: 150)
+                        .foregroundColor(.yellow)
+                        .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
+                        .shadow(radius: 10)
+                        VStack {
+                            Text(self.data.name)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text("Sortie : ")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            Spacer()
+                            .padding(.bottom, 10)
+                        }
+                    }
+                    HStack {
                         Text("Film action interdit au moins de 18 ans")
-                        .frame(maxWidth: .infinity, alignment: .center)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
             }
@@ -91,17 +93,32 @@ struct CollectionView: View {
         let data: DataModel
 
         var body: some View {
-            VStack {
-                Image(self.data.imageName)
-                .resizable()
-                .frame(width: 150, height: 150)
-                .foregroundColor(.yellow)
-                .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
-                .shadow(radius: 10)
-                Text(self.data.name)
-                Text("Date de sortie")
-                Text("Synopsis")
-                .frame(maxWidth: .infinity, alignment: .center)
+            VStack(alignment: .leading, spacing: 120) {
+                HStack(alignment: .top, spacing: 20) {
+                    Image(self.data.imageName)
+                    .resizable()
+                        .frame(width: 150, height: 150, alignment: .top)
+                    .foregroundColor(.yellow)
+                    .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
+                    .shadow(radius: 10)
+                     VStack {
+                        Text(self.data.name)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        Text("Date de sortie")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                    }
+                }
+                Divider()
+                HStack {
+                    Text("Synopsis")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                Divider()
+                HStack {
+                    Text("Trailer")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
             }
         }
     }
