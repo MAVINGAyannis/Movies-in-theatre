@@ -5,6 +5,8 @@
 //  Created by Yannis Mavinga on 26/08/2021.
 //
 
+// Données à récuperer
+
 import Foundation
 
 let data: [DataModel] = [

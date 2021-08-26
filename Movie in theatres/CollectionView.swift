@@ -5,6 +5,8 @@
 //  Created by Yannis Mavinga on 26/08/2021.
 //
 
+// Vue contenant la liste déroulante des films
+
 import Foundation
 import SwiftUI
 
@@ -22,11 +24,13 @@ struct CollectionView: View {
                         .foregroundColor(.yellow)
                         .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
                         .shadow(radius: 10)
-                        VStack {
+                        VStack(spacing: 10) {
                             Text(self.data.title)
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.system(size: 17, weight: .heavy, design: .default))
                             Text(self.data.release)
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .font(.system(size: 16, design: .default))
                             Spacer()
                             .padding(.bottom, 10)
                         }

@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 
+// Vue détaillé sur le film choisi après sélection
+
 struct Choosed_movie: View {
     let data: DataModel
 
@@ -24,8 +26,10 @@ struct Choosed_movie: View {
                     VStack(spacing: 10) {
                         Text(self.data.title)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.system(size: 17, weight: .heavy, design: .default))
                         Text(self.data.release)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.system(size: 16, design: .default))
                     
                     }
                 }
@@ -36,8 +40,9 @@ struct Choosed_movie: View {
                 }
                 Divider()
                 HStack {
-                    Text("Trailer")
+                    Text("Trailer indisponible")
                     .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.system(size: 16, weight: .light, design: .default))
                 }
             }
         }

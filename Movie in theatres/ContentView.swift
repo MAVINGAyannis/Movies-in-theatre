@@ -7,6 +7,9 @@
 import SwiftUI
 
 struct NavigationConfigurator: UIViewControllerRepresentable {
+    
+    // Configurateur permettant de changer la police de caractère du .navigationBarTitle
+
     var configure: (UINavigationController) -> Void = { _ in }
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
